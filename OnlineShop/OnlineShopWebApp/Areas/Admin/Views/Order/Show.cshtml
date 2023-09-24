@@ -1,0 +1,87 @@
+﻿@model OrderViewModel
+@{
+    int a = (int)Model.Status;
+}
+
+<div class="row">
+    @await Html.PartialAsync("LeftMenu")
+    <form class="col-9 card shadow">
+    <div>
+        <div class="card-header">
+            <h3>Заказ номер @Model.Id</h3>
+        </div>
+        <div class="card-body">
+            <table>
+                <tr>
+                    <td>Дата и время оформления</td>
+                    <td>@Model.DateTime.ToString()</td>
+                </tr>
+                <tr>
+                    <td>Способ получения</td>
+                    <td>@Model.Receipt</td>
+                </tr>
+                <tr>
+                    <td>Адресс</td>
+                    <td>@Model.Address</td>
+                </tr>
+                <tr>
+                    <td>Получатель</td>
+                        <td>@Model.UserInfo.FirstName @Model.UserInfo.LastName</td>
+                </tr>
+                <tr>
+                    <td>Телефон</td>
+                    <td>@Model.UserInfo.PhoneNumber</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>@Model.UserInfo.Email</td>
+                </tr>
+                <tr>
+                    <td>Сумма заказа</td>
+                    <td>@Model.OrderItems.Sum(o => o.Product.Cost * o.Count)</td>
+                </tr>
+                 <tr>
+                    <td>Статус заказа</td>
+                    <td>
+                        <select id="Statuses" name="codeStatus">
+                            <option value="@((int)Model.Status)" selected disabled>@Model.Status.GetDisplayName()</option>
+                            <option value="@((int)OrderStatuses.Created)">@OrderStatuses.Created.GetDisplayName()</option>
+                            <option value="@((int)OrderStatuses.Processed)">@OrderStatuses.Processed.GetDisplayName()</option>
+                            <option value="@((int)OrderStatuses.Delivering)">@OrderStatuses.Delivering.GetDisplayName()</option>
+                            <option value="@((int)OrderStatuses.Canceled)">@OrderStatuses.Canceled.GetDisplayName()</option>
+                            <option value="@((int)OrderStatuses.Delivered)">@OrderStatuses.Delivered.GetDisplayName()</option>
+                        </select>
+                    </td>
+                </tr>
+                    <tr>
+                        <td>Товары</td>
+                        <td>
+                            <table class="table table-bortered table-hover">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Наименование</th>
+                                    <th>Цена</th>
+                                    <th>Количество</th>
+                                </tr>
+                                @foreach (var item in Model.OrderItems)
+                                {
+                                    <tr>
+                                        <td>@item.Product.Id</td>
+                                        <td>@item.Product.Name</td>
+                                        <td>@item.Product.Cost</td>
+                                        <td>@item.Count</td>
+                                    </tr>
+                                }
+                            </table>
+                        </td>
+                    </tr>
+            </table>
+        </div>
+        <div class="card-footer">
+            <input type="hidden" name="orderId" value="@Model.Id"/>
+            <button type="submit" class="btn btn-secondary" asp-area="Admin" asp-controller="Order" asp-action="SaveStatus">Изменить статус</button>
+            
+        </div>
+    </div>
+    </form>
+</div>

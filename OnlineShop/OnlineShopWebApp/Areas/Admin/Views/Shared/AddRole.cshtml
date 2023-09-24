@@ -1,0 +1,27 @@
+﻿@model RoleViewModel
+
+<a data-toggle="modal" href="#AddRole">Добавить новую роль</a>
+
+<!-- Modal -->
+<div class="modal fade" id="AddRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Добавление роли</h5>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="NameRole" class="control-label col-2">Наименование</label><br />
+                        <input asp-for="NameRole" class="form-control col-10" name="NameRole" />
+                        <span class="text-danger" asp-validation-for="NameRole" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-dark" asp-area="Admin" asp-controller="Role" asp-action="Add">Сохранить</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

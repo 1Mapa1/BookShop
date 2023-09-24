@@ -1,0 +1,40 @@
+﻿<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow" style="background-color: #FFC486; height: 120px;">
+        <div class="container container-fluid overflow-hidden">
+            <h1><a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">BookPavel</a></h1>
+            
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="input-group col-5 mt-4">
+                    <form>
+                        <input type="text" class="form-control" name="search" style="background-color: #A28A71; color: white; width:350px; height: 50px">
+                        <button type="submit" asp-area="" asp-controller="Home" asp-action="SearchProduct" class=" btn btn-dark text-white">Поиск</button>
+                    </form>
+                </div>
+                <ul class="navbar-nav flex-grow-1 ml-0 col-7 mr-5 mt-4">
+                    <li class="nav-item">
+                        <h4 class="m-0 p-o"><a class="nav-link text-white" asp-area="" asp-controller="Favorites" asp-action="Index">Избраное</a></h4>
+                    </li>
+                    <li class="nav-item">
+                        @await Component.InvokeAsync("Cart")
+                    </li>
+                    <li class="nav-item">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                           @await Component.InvokeAsync("Icon")
+                        }
+                        else
+                        {
+                            <h4><a class="nav-link text-white" asp-area="" asp-controller="Profile" asp-action="SingIn">Войти</a></h4>
+                        }
+                    </li>
+                    <li>
+                        @if (User.IsInRole(Constans.AdminRoleName))
+                        {
+                            <a class="nav-link text-white mt-1" asp-area="Admin" asp-controller="Product" asp-action="Index">Администратор</a>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

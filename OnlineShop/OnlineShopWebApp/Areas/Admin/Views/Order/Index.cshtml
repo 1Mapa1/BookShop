@@ -1,0 +1,31 @@
+﻿@model List<OrderViewModel>
+
+<div class="row">
+    @await Html.PartialAsync("LeftMenu")
+    <div class="col-9">
+        <h1>Список заказов</h1>
+        <table class="table table-bortered table-hover">
+            <tr>
+                <th>ID</th>
+                <th>Cумма</th>
+                <th>Статус</th>
+                <th>Пользователь</th>
+                <th>Дата</th>
+                <th>Время</th>
+            </tr>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.OrderItems.Sum(o => o.Product.Cost * o.Count)</td>
+                    <td>@order.Status.GetDisplayName()</td>
+                    <td>@order.UserInfo.FirstName @order.UserInfo.LastName</td>
+                    <td>@order.DateTime.ToShortDateString()</td>
+                    <td>@order.DateTime.ToShortTimeString()</td>
+                    <td><a asp-area="Admin" asp-controller="Order" asp-action="Show" asp-route-orderId="@order.Id" >Посмотреть</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+
+</div>

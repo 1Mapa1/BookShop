@@ -1,0 +1,56 @@
+﻿@model List<FavoriteProductViewModel>;
+@{
+    var products = Model;
+}
+@if (ViewBag.Sorting == 1)
+{
+    products = Model.OrderBy(p => p.Product.Cost).ToList();
+}
+@if (ViewBag.Sorting == 2)
+{
+    products = Model.OrderByDescending(p => p.Product.Cost).ToList();
+}
+<h1>Избранное</h1>
+<p class="font-weight-light">@Model.Count() товаров</p>
+
+<div class="row">
+    @foreach (var product in products)
+    {
+        <div class="col-7 mr-5 mb-2 card row p-5" style="background-color: #FFD6AB">
+            <img src="https://cdn.eksmo.ru/v2/ITD000000000252334/COVER/cover1__w600.jpg" class="col-2 mr-4 ml-0">
+            <div class="col-8">
+                <p>@product.Product.Name</p>
+                <h3>@product.Product.Cost руб.</h3>
+            </div>
+            <div class="pl-0 pr-0">
+                @await Component.InvokeAsync("ButtonCart", @product.Product.Id)
+                <a class="btn btn-dark" asp-controller="Favorites" asp-action="RemoveProduct" asp-route-productId="@product.Product.Id">Удалить</a>
+            </div>
+        </div>
+        @if (product == products[0])
+        {
+            <div class="col-4">
+                <form>
+                    <div class="p-4 border-2 position-sticky" style="background-color: #FFD6AB">
+                        <h2 class="mb-4" style="text-align:center">Сортировка</h2>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadio" id="1" value="1">
+                                По возрастанию цены
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadio" id="2" value="2">
+                                По убыванию цены
+                            </label>
+                        </div>
+                        <input type="submit" class="btn btn-dark mt-3 ml-4 col-10 mb-1" value="Сортировать">
+                        <a class="btn btn-dark mt-3 ml-4 col-10" asp-controller="Favorites" asp-action="Index" asp-route-optionsRadio="0">Отменить сортировку</a>
+                    </div>
+                </form>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-dark ml-5 mt-2 col-9" role="button">Вернуться к покупкам</a>
+            </div>
+        }
+    }
+</div>

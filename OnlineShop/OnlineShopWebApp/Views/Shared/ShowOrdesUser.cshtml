@@ -1,0 +1,37 @@
+﻿@model List<OrderItemViewModel>
+
+@{
+    string showModel = $"ShowModal{Guid.NewGuid()}";
+}
+
+<a type="button" data-toggle="modal" href="#@showModel">
+    Посмотреть
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="@showModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Товары</h5>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bortered table-hover">
+                    <tr>
+                        <th>Наименование</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Product.Name</td>
+                            <td>@item.Product.Cost</td>
+                            <td>@item.Count</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

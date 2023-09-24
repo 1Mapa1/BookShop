@@ -1,0 +1,19 @@
+﻿@model List<IdentityRole>
+
+<div class="row">
+    @await Html.PartialAsync("LeftMenu")
+    <div class="col-9">
+        <h1>Список ролей</h1>
+        @await Html.PartialAsync("AddRole", new RoleViewModel())
+        <div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
+        <table class="table table-bortered table-hover">
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>@role.Name</td>
+                    <td align="right">@await Html.PartialAsync("RemoveRole", role)</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

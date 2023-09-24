@@ -1,0 +1,10 @@
+﻿@model string
+
+@if (Model == null)
+{
+    <h4><a class="nav-link " asp-area="" asp-controller="Profile" asp-action="Index"><img class="img-fluid rounded-circle" width="50" height="50" src="~/images/standart.png"></a></h4>
+}
+else
+{
+    <h4><a class="nav-link " asp-area="" asp-controller="Profile" asp-action="Index"><img class="img-fluid rounded-circle" width="50" height="50" src="@Model"></a></h4>
+}

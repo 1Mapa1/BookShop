@@ -1,0 +1,48 @@
+﻿@model UserViewModel
+
+<a type="button" class="btn btn-dark" data-toggle="modal" href="#redactModel">
+    Редактировать данные
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="redactModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Редактировать</h5>
+            </div>
+            <form role="form" class="form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input asp-for="Login" class="form-control" placeholder="Логин" name="Login" value="@Model.Login"/>
+                        <span class="text-danger" asp-validation-for="Login" />
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <input asp-for="FirstName" class="form-control" placeholder="Имя" name="FirstName" value="@Model.FirstName" />
+                            <span class="text-danger" asp-validation-for="FirstName" />
+                        </div>
+                        <div class="form-group col-6">
+                            <input asp-for="LastName" class="form-control" placeholder="Фамилия" name="LastName" value="@Model.LastName" />
+                            <span class="text-danger" asp-validation-for="LastName" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="Телефон" name="PhoneNumber" value="@Model.PhoneNumber" />
+                            <span class="text-danger" asp-validation-for="PhoneNumber" />
+                        </div>
+                        <div class="form-group col-6">
+                            <input asp-for="Email" class="form-control" placeholder="Email" name="Email" value="@Model.Email" />
+                            <span class="text-danger" asp-validation-for="Email" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-dark" asp-area="Admin" asp-controller="User" asp-action="Redact">Сохранить</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

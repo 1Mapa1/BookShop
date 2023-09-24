@@ -1,0 +1,110 @@
+﻿
+@model ReviewViewModel
+<a data-toggle="modal" class="btn btn-dark" href="#LeaveReview">Оставить отзыв</a>
+
+<!-- Modal -->
+<div class="modal fade" id="LeaveReview" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Оставить отзыв</h5>
+            </div>
+            <form method="post">
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label class="control-label col-2">Оценка</label>
+		            <div class="rating-area col-10">
+			            <input type="radio" id="star-5" name="Rating" value="5">
+			            <label for="star-5" title="Оценка «5»"></label>
+			            <input type="radio" id="star-4" name="Rating" value="4">
+			            <label for="star-4" title="Оценка «4»"></label>
+			            <input type="radio" id="star-3" name="Rating" value="3">
+			            <label for="star-3" title="Оценка «3»"></label>
+			            <input type="radio" id="star-2" name="Rating" value="2">
+			            <label for="star-2" title="Оценка «2»"></label>
+			            <input type="radio" id="star-1" checked name="Rating" value="1">
+			            <label for="star-1" title="Оценка «1»"></label>
+		            </div>
+                </div>
+                <div class="form-group">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                         <input asp-for="Login" class="form-control m-2" name="Login" value="@User.Identity.Name" />
+                    <span class="text-danger" asp-validation-for="Login" />
+                    }
+                    else
+                    {
+                        <input asp-for="Login" class="form-control m-2" name="Login" placeholder="Имя"/>
+                        <span class="text-danger" asp-validation-for="Login" />
+                    }
+                </div>
+                <div class="form-group">
+                        <input asp-for="Header" class="form-control m-2" name="Header" placeholder="Заголовок" />
+                        <span class="text-danger" asp-validation-for="Header" />
+                </div>
+                <textarea class="form-control mr-5 ml-2" name="Comment" placeholder="Комментарий"></textarea>
+                    <input type="hidden" name="productId" value="@ViewData["productId"]" />
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <button type="submit" class="btn btn-dark" asp-controller="Product" asp-action="LeaveReview">Отправить</button>
+                </div>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Отмена</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@*не понимаю почему когда закидываю в общий файл ccs он не видит эти стили*@
+<style>
+    .rating-area {
+        overflow: hidden;
+        width: 265px;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    .rating-area:not(:checked) > input {
+        display: none;
+    }
+
+    .rating-area:not(:checked) > label {
+        float: right;
+        width: 42px;
+        padding: 0;
+        cursor: pointer;
+        font-size: 32px;
+        line-height: 32px;
+        color: lightgrey;
+        text-shadow: 1px 1px #bbb;
+    }
+
+        .rating-area:not(:checked) > label:before {
+            content: '★';
+        }
+
+    .rating-area > input:checked ~ label {
+        color: gold;
+        text-shadow: 1px 1px #c60;
+    }
+
+    .rating-area:not(:checked) > label:hover,
+    .rating-area:not(:checked) > label:hover ~ label {
+        color: gold;
+    }
+
+    .rating-area > input:checked + label:hover,
+    .rating-area > input:checked + label:hover ~ label,
+    .rating-area > input:checked ~ label:hover,
+    .rating-area > input:checked ~ label:hover ~ label,
+    .rating-area > label:hover ~ input:checked ~ label {
+        color: gold;
+        text-shadow: 1px 1px goldenrod;
+    }
+
+    .rate-area > label:active {
+        position: relative;
+    }
+</style>

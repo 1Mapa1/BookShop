@@ -1,0 +1,76 @@
+﻿@model OrderViewModel
+
+<div class="row">
+    <div class="col-8 border-right" >
+        <form role="form" class="form" method="post">
+            <div>
+                <h3>Данные пользователя</h3>
+                
+                <div class="row">
+                    <div class="form-group col-5">
+                        <label asp-for="UserInfo.LastName" class="control-label col-2">Фамилия</label>
+                        <input class="form-control col-10" name="UserInfo.LastName" value="@Model.UserInfo.LastName" asp-for="UserInfo.LastName" />
+                        <span class="text-danger" asp-validation-for="UserInfo.LastName" />
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="UserInfo.FirstName" class="control-label col-3">Имя</label>
+                        <input class="form-control col-10" name="UserInfo.FirstName" value="@Model.UserInfo.FirstName" asp-for="UserInfo.FirstName" />
+                        <span class="text-danger" asp-validation-for="UserInfo.FirstName" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-5">
+                        <label asp-for="UserInfo.PhoneNumber" class="control-label col-2">Телефон</label>
+                        <input class="form-control col-10" name="UserInfo.PhoneNumber" value="@Model.UserInfo.PhoneNumber" asp-for="UserInfo.PhoneNumber" />
+                        <span class="text-danger" asp-validation-for="UserInfo.PhoneNumber" />
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="UserInfo.Email" class="control-label col-3">E-mail</label>
+                        <input class="form-control col-10" name="UserInfo.Email" value="@Model.UserInfo.Email" asp-for="UserInfo.Email" />
+                        <span class="text-danger" asp-validation-for="UserInfo.Email" />
+                    </div>
+                </div>
+                
+            </div> 
+            <div>
+                <h3>Выберите способ получения</h3>
+                <div class="row mb-4">
+                    <a href="#" class="btn btn-dark col-3 mr-2" role="button">Самовывоз</a>
+                    <input type="hidden" name="Receipt" value="Самовывоз" />
+                    @*Доставка пока не продумана*@
+                    <a href="#" class="btn btn-dark col-3 disabled" role="button">Доставка</a>
+                </div>
+                <div class="container row p-3" style="background-color: #FFD6AB; border: solid">
+                    <p class="col-5 mr-5">г. Москва, ул. Большая полянка, д. 28к2</p>
+                    <input type="hidden" class="col-5 mr-5" name="Address" value="г. Москва, ул. Большая полянка, д. 28к2">
+                    <div>
+                        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aad852dfa106fbcea95a35757e85ba17201001e89ca91f0d132332b8e0016edcf&amp;width=300&amp;height=200&amp;lang=ru_RU&amp;scroll=true"></script>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>Выберите способ оплаты</h3>
+                <div class="custom-radio">
+                    <label>
+                        <input type="radio" name="Payment" value="При получении" checked />
+                        При получении
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="Payment" value="Онлайн" />
+                        Онлайн
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-dark col-5 " role="button" asp-controller="Ordering" asp-action="Save">Подтвердить заказ</button>
+        </form>
+    </div>
+    <div class="col-4">
+        @foreach (var item in Model.OrderItems)
+        {
+            <p><h5>@item.Product.Name</h5> Количество: @item.Count Всего: @(item.Product.Cost * item.Count) р.</p>
+        }
+        <h4>Итого: @Model.OrderItems.Sum(product => product.Product.Cost * product.Count)</h4>
+    </div>
+</div>

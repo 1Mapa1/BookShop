@@ -1,0 +1,41 @@
+﻿
+@model List<CartItemViewModel>
+@{
+    ViewData["Title"] = "Корзина товаров";
+}
+<h1>Корзина</h1> 
+<p class="font-weight-light">@Model.Count() товар</p>
+
+<div class="row">
+
+    @foreach (var product in Model)
+    {
+        <div class="col-7 mr-5 mb-2 card row p-5" style="background-color: #FFD6AB">
+            <img src="https://cdn.eksmo.ru/v2/ITD000000000252334/COVER/cover1__w600.jpg" class="col-2 mr-4 ml-0">
+            <div class="col-8">
+                <p>@product.Product.Name</p>
+                <p>Количество товара: @product.Count</p>
+                <h3>@(product.Product.Cost * product.Count) руб.</h3>
+            </div>
+            <div class="pl-0 pr-0">
+                <a class="btn btn-dark mr-4" asp-controller="Cart" asp-action="RemoveProduct" asp-route-productId="@product.Product.Id ">-</a>
+                <a class="btn btn-dark" asp-controller="Cart" asp-action="AddProduct" asp-route-productId="@product.Product.Id ">+</a>
+            </div>
+        </div>
+        @if (product == Model[0])
+        {
+            <div class="col-4">
+                <div class="p-4 border-2 position-sticky" style="background-color: #FFD6AB">
+                    <h2 class="mb-4" style="text-align:center">Условия заказа</h2>
+                    <p>Промокод: <input class="border-2" type="text"></p>
+                    <br />
+                    <p>Итого: </p>
+                    <h3>@Model.Sum(product => product.Count) товара: @Model.Sum(product => product.Product.Cost * product.Count) руб.</h3>
+                    <a asp-controller="Ordering" asp-action="Index" class="btn btn-dark col-10 ml-3" role="button">Оформить заказ</a>
+                </div>
+                <a asp-controller="Cart" asp-action="Clear" class="btn btn-dark mt-3 ml-4 col-10">Очистить корзину</a>
+            </div>
+        }
+    }
+</div>
+

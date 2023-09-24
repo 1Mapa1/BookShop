@@ -1,0 +1,68 @@
+﻿@model ProductViewModal;
+@{
+    ViewData["Title"] = "Book Page";
+    ViewData["productId"] = Model.Id;
+}
+<style>
+    li {
+        list-style-type: none; 
+    }
+    header{
+        margin-bottom: 80px;
+    }
+</style>
+<div class="row">
+    <img src="@Model.ImgPath" class="col-5" style="height: 600px">
+    <div class="col-3">
+        <h3><sapn style="font-size: 20px; font-weight: bold">@Model.Name</sapn></h3>
+        <span>Оценка: </span>
+        @for (int i = 0; i < Math.Round(Model.Rating()); i++)
+        {
+            <span class="h3" style="color: gold">&#9733</span>
+        }
+        <p>Автор: @Model.Author</p>
+        <p>Жанр: @Model.Genre</p>
+    </div>
+    <div class="col-4 ">
+        <div class="p-3" style="background-color: #FFD6AB; border: solid">
+            <p class="text-success">&#10004 В наличии</p>
+            <h3>@Model.Cost руб.</h3>
+            <div class="mt-5 row pl-4 pr-5">
+                @await Component.InvokeAsync("ButtonCart", Model.Id)
+                @await Component.InvokeAsync("ButtonFavorites", Model.Id)
+            </div>
+            
+        </div>
+        <div class="mt-5">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-dark col-10 mr-3" role="button">Вернуться к покупкам</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h3>Описание</h3>
+    <p>@Model.Description</p>
+</div>
+<hr>
+<div>
+    <h3>Отзовы</h3>
+    <div class="row mb-3">
+        @foreach (var review in Model?.Reviews)
+        {
+            <div class="card shadow col-3 mr-4 mb-4">
+                <div class="card-header">
+                    <h5>@review.Header</h5>
+                    <span class="small">Оценка: @review.Rating</span>
+                </div>
+                <div class ="card-body">
+                    <p>@review.Comment</p>
+                </div>
+                <div class="card-footer">
+                    <small><strong>@review.Login</strong></small>
+                </div>
+            </div>
+        }
+    </div>
+    <div>
+        @await Html.PartialAsync("LeaveReview", new ReviewViewModel()) 
+    </div>
+</div>

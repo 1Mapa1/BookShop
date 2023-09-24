@@ -1,0 +1,66 @@
+﻿@model UserViewModel
+
+<a data-toggle="modal" href="#AddUser">Добавить нового пользоввателя</a>
+
+<!-- Modal -->
+<div class="modal fade" id="AddUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Добавление пользователя</h5>
+            </div>
+            <form role="form" class="form" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input asp-for="Login" class="form-control" placeholder="Логин" name="Login" />
+                        <span class="text-danger" asp-validation-for="Login" />
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <input asp-for="Password" class="form-control" placeholder="Пароль" name="Password" />
+                            <span class="text-danger" asp-validation-for="Password" />
+                        </div>
+                        <div class="form-group col-6">
+                            <input asp-for="PasswordConfirm" class="form-control" placeholder="Подтверждение пароля" name="PasswordConfirm" />
+                            <span class="text-danger" asp-validation-for="PasswordConfirm" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <p>Роль</p>
+                        <hr />
+                        <select id="Statuses" name="Role">
+                            <option value="" selected disabled>User</option>
+                            @await Component.InvokeAsync("RoleList")
+                        </select>
+                    </div>
+                    <p>Необязательные поля</p>
+                    <hr />
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <input asp-for="FirstName" class="form-control" placeholder="Имя" name="FirstName" />
+                            <span class="text-danger" asp-validation-for="FirstName" />
+                        </div>
+                        <div class="form-group col-6">
+                            <input asp-for="LastName" class="form-control" placeholder="Фамилия" name="LastName" />
+                            <span class="text-danger" asp-validation-for="LastName" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="Телефон" name="PhoneNumber" />
+                            <span class="text-danger" asp-validation-for="PhoneNumber" />
+                        </div>
+                        <div class="form-group col-6">
+                            <input asp-for="Email" class="form-control" placeholder="Email" name="Email" />
+                            <span class="text-danger" asp-validation-for="Email" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-dark" asp-area="Admin" asp-controller="User" asp-action="Add">Сохранить</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

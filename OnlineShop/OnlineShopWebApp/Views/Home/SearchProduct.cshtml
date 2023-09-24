@@ -1,0 +1,22 @@
+﻿@model List<ProductViewModal>;
+
+<h2 style="color: #7C4811">Книги</h2>
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-3 card shadow">
+            <a asp-controller="Product" asp-action="Index" asp-route-productId="@product.Id" style="color: black; text-decoration:none">
+                <div class="card-body pb-0">
+                    <img src="https://cdn.eksmo.ru/v2/ITD000000000252334/COVER/cover1__w600.jpg" class="card-img-top" style="width: 150px; height: 225px;">
+                    <p>@product.Name</p>
+                    <p><b>@product.Cost руб.</b></p>
+                </div>
+            </a>
+            <div class="card-footer row">
+                @await Component.InvokeAsync("ButtonCart", @product.Id)
+                @await Component.InvokeAsync("ButtonFavorites", @product.Id)
+            </div>
+
+        </div>
+    }
+</div>

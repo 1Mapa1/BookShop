@@ -1,0 +1,26 @@
+﻿@model Registration
+
+<form method="post">
+    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl">
+    <div align="center" class="mt-5">
+        <div style="width: 300px">
+            <h5 class="mb-3">Регистрация</h5>
+            <div >
+                <input asp-for="Login" class="form-control" name="Login" placeholder="Логин" required />
+                <span asp-validation-for="Login" class="text-danger"></span>
+
+                <input type="password" asp-for="Password" class="form-control mb-2 mt-2" id="Password" name="Password" placeholder="Пароль"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
+
+                <input type="password" asp-for="PasswordConfirm" class="form-control" id="RepitPassword" name="PasswordConfirm" placeholder="Подтвердить пароль" />
+                <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+
+                <div class="validation text-danger" asp-validation-summary="All"></div>
+            </div>
+
+            <div style="text-align: center">
+            <input type="submit" class="btn btn-dark mt-4" asp-controller="Profile" asp-action="VerifyRegistrationData" value="Зарегистрироваться">
+            </div>
+        </div>
+    </div>
+</form>

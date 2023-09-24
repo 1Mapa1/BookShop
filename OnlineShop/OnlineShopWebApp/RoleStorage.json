@@ -1,0 +1,14 @@
+﻿[
+  {
+    "Id": 1,
+    "NameRole": "Admin"
+  },
+  {
+    "Id": 2,
+    "NameRole": "SysAdmin"
+  },
+  {
+    "Id": 3,
+    "NameRole": "User"
+  }
+]

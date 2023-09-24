@@ -1,0 +1,28 @@
+﻿@model ProductViewModal
+@{
+    string removeModel = $"ShowModal{Model.Id}";
+}
+
+<a type="button" data-toggle="modal" href="#@removeModel">
+    Посмотреть подробно
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="@removeModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body row p-2">
+                <img src="@Model.ImgPath" class="col-5">
+                <div class="col-7">
+                    <h3><sapn style="font-size: 20px; font-weight: bold">@Model.Name</sapn></h3>
+                    <p>Автор: @Model.Author</p>
+                    <p>Жанр: @Model.Genre</p>
+                    <p>Описание: @Model.Description</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>

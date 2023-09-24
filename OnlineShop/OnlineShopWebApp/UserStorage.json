@@ -1,0 +1,77 @@
+﻿[
+  {
+    "Id": "b1d3192f-f450-488f-9865-a434292e8a9f",
+    "Login": "Admin",
+    "Password": "12345678",
+    "PasswordConfirm": null,
+    "FirstName": "asd",
+    "LastName": "Tvfthryyy",
+    "Telephon": "+7999-999-9999",
+    "Email": "pavel@mail.ru",
+    "Role": {
+      "Id": 1,
+      "NameRole": "Admin"
+    },
+    "Remember": false
+  },
+  {
+    "Id": "2b6de311-95b2-4ae7-9f72-e9a9bcf4f82e",
+    "Login": "Паша",
+    "Password": "12345678",
+    "PasswordConfirm": null,
+    "FirstName": null,
+    "LastName": null,
+    "Telephon": null,
+    "Email": null,
+    "Role": null,
+    "Remember": false
+  },
+  {
+    "Id": "211c0d9c-623c-48a0-bfa3-5a145b9d6d97",
+    "Login": "Леша",
+    "Password": "12345678",
+    "PasswordConfirm": null,
+    "FirstName": "Алексей",
+    "LastName": "Абрамов",
+    "Telephon": "+7999-999-9999",
+    "Email": "pavel@mail.ru",
+    "Role": null,
+    "Remember": false
+  },
+  {
+    "Id": "a5853b14-8c4c-479a-8205-f13137b6d2c3",
+    "Login": "Юля",
+    "Password": "12345678",
+    "PasswordConfirm": null,
+    "FirstName": null,
+    "LastName": "Каширова",
+    "Telephon": null,
+    "Email": null,
+    "Role": null,
+    "Remember": false
+  },
+  {
+    "Id": "8156183f-fb53-4b26-8c8b-c3f092806718",
+    "Login": "Killer228",
+    "Password": "12345678",
+    "PasswordConfirm": "12345678",
+    "FirstName": "Артем",
+    "LastName": "Кудашкин",
+    "Telephon": null,
+    "Email": "killer228@gmail.com",
+    "Role": null,
+    "Remember": false
+  },
+  {
+    "Id": "5f4475a8-d015-4055-bf14-36ac60ccdc5a",
+    "Login": "Гоша",
+    "Password": "12345678",
+    "PasswordConfirm": "12345678",
+    "FirstName": "Гоша",
+    "LastName": "Кудашкин",
+    "Telephon": null,
+    "Email": "pavel.maslov.11@mail.ru",
+    "Role": null,
+    "Remember": false
+  }
+]

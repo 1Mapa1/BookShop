@@ -1,0 +1,50 @@
+﻿@model UserViewModel
+
+
+<div class="row">
+    @await Html.PartialAsync("LeftMenu")
+    <div class="col-9">
+        <div class="card-header">
+            <h3>Пользователь @Model.Login</h3>
+        </div>
+        <div class="card-body">
+            <table>
+                <tr>
+                    <td>Имя</td>
+                    <td>@Model.FirstName</td>
+                </tr>
+                <tr>
+                    <td>Фамилия</td>
+                    <td>@Model.LastName</td>
+                </tr>
+                <tr >
+                    <td>Телефон</td>
+                    <td>@Model.PhoneNumber</td>
+                </tr>
+                    <tr>
+                    <td>Почта</td>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <form>
+                    <td>Роль</td>
+                    <td>
+                        <select id="Statuses" name="userRole">
+                            <option value="@Model.Role" selected disabled>@Model.Role</option>
+                            @await Component.InvokeAsync("RoleList")
+                        </select>
+                    </td>
+                    <input type="hidden" value="@Model.Login" name="userLogin"/>
+                    <td><button asp-area="Admin" asp-controller="User" asp-action="SwitchRole" type="submit" class="btn btn-dark">Сменить роль</button></td>
+                    </form>
+                </tr>
+            </table>
+        </div>
+        <div class="card-footer">
+            @await Html.PartialAsync("RedactUser", Model)
+            @await Html.PartialAsync("RedactPasswordUser", Model)
+            @await Html.PartialAsync("RemoveUser", Model)
+        </div>
+    </div>
+    
+</div>

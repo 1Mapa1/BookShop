@@ -1,0 +1,45 @@
+﻿@model RedactImgUser
+
+
+<a type="button" class="btn btn-dark" data-toggle="modal" href="#RedactModel">
+    Редактировать изображение
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="RedactModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Редактировать</h5>
+                <p>@Model.Login</p>
+
+            </div>
+            <form method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        @if (Model.ImgPath == null)
+                        {
+                            <img class="col-4 mr-5" src="/images/standart.png">
+                        }
+                        else
+                        {
+                            <img class="col-4 mr-5" src="@Model.ImgPath" />
+                        }
+                        <input type="hidden" name="ImgPath" value="@Model.ImgPath" />
+                        <div class="form-group col-7">
+                            <label>Загрузить изображение</label>
+                            <input type="file" name="UploadedFile" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="Login" value="@Model.Login" />
+                    <button type="submit" class="btn btn-secondary" asp-area="" asp-controller="Profile" asp-action="RedactImg">Редактировать</button>
+                    <button type="submit" class="btn btn-danger" asp-area="" asp-controller="Profile" asp-action="DeleteImg">Удалить</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

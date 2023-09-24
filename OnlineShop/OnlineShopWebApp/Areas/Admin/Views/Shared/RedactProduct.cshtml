@@ -1,0 +1,61 @@
+﻿@model ProductViewModal
+@{
+    string removeModel = $"RedactModal{Model.Id}";
+}
+
+<a type="button" data-toggle="modal" href="#@removeModel">
+    Редактировать
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="@removeModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Редактировать</h5>
+            </div>
+            <form method="post" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group row">
+                    <img src="@Model.ImgPath" class="col-5">
+                    <input type="hidden" name="ImgPath" value="@Model.ImgPath"/>
+                    <div class="form-group col-5">
+                        <label>Загрузить изображение</label>
+                        <input type="file" name="UploadedFile" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label col-2">Наименование</label><br />
+                    <input asp-for="Name" class="form-control col-10" name="Name" value="@Model.Name" />
+                    <span class="text-danger" asp-validation-for="Name" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Author" class="control-label col-2">Автор</label><br />
+                    <input asp-for="Author" class="form-control col-10" name="Author" value="@Model.Author" />
+                    <span class="text-danger" asp-validation-for="Author" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Genre" class="control-label col-2">Жанр</label><br />
+                    <input asp-for="Genre" class="form-control col-10" name="Genre" value="@Model.Genre" />
+                    <span class="text-danger" asp-validation-for="Genre" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cost" class="control-label col-2">Цена</label><br />
+                    <input asp-for="Cost" class="form-control col-10" name="Cost" value="@Model.Cost.ToString().Replace(',', '.')" />
+                    <span class="text-danger" asp-validation-for="Cost" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label col-2">Описание</label><br />
+                    <input asp-for="Description" class="form-control col-10" name="Description" />
+                    <span class="text-danger" asp-validation-for="Description" value="@Model.Description"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="btn btn-secondary" asp-area="Admin" asp-controller="Product" asp-action="Redact">Редактировать</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Отмена</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

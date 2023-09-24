@@ -1,0 +1,22 @@
+﻿@model List<OrderProfile>
+
+<h1>Заказы</h1>
+
+<table class="table table-bortered table-hover">
+    <tr>
+        <th>№</th>
+        <th>Дата</th>
+        <th>Статус</th>
+        <th>Сумма</th>
+    </tr>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <tr>
+            <td>@(i + 1)</td>
+            <td>@Model[i].DateTime</td>
+            <td>@Model[i].Status.GetDisplayName()</td>
+            <td>@Model[i].OrderItems.Sum(product => product.Product.Cost * product.Count)</td>
+            <td>@await Html.PartialAsync("ShowOrdesUser", Model[i].OrderItems)</td>
+        </tr>
+    }
+</table>
